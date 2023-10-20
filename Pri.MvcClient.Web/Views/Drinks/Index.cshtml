@@ -1,0 +1,25 @@
+﻿@model DrinksIndexViewModel
+    <div class="col co-lg-3 mb-2">
+        <a asp-controller="Drinks" asp-action="Add" class="btn btn-outline-info">New</a>
+    </div>
+    <div class="row">
+        @foreach (var drink in Model.Drinks)
+        {
+            <div class="col col-lg-3 mb-2">
+                <div class="card" style="width: 18rem;">
+                    <!--tips: add .text-center,.text-right to the .card to change card text alignment-->
+                    <img src="@drink.ImageUrl" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">@drink.Name</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@drink.AlcoholPercentage%</h6>
+                        <a asp-controller="Drinks"
+                           asp-action="Get"
+                           asp-route-id="@drink.Id" class="btn btn-primary">Info</a>
+                        <a asp-controller="Drinks"
+                           asp-action="Delete"
+                           asp-route-id="@drink.Id" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
