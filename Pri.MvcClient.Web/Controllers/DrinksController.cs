@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -50,6 +51,7 @@ namespace Pri.MvcClient.Web.Controllers
             return View(drinksGetViewModel);
         }
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Add()
         {
             //get the categories

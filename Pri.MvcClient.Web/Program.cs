@@ -25,12 +25,15 @@ namespace Pri.MvcClient.Web
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(
                 options =>
                 {
+                    //ONLY FOR DEVELOPMENT PURPOSES!!!
                     options.Password.RequiredUniqueChars = 0;
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireDigit = false;
                     options.Password.RequireLowercase = false;
                     options.Password.RequireUppercase = false;
                     options.Password.RequiredLength = 4;
+                    options.SignIn.RequireConfirmedEmail = false;
+                    options.Lockout.AllowedForNewUsers = false;
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
@@ -50,8 +53,9 @@ namespace Pri.MvcClient.Web
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-
+            
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
